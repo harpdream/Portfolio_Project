@@ -1,5 +1,11 @@
 --SQL Project using data from https://ourworldindata.org/covid-deaths
 
+--Tableau illustrations:
+
+--   https://public.tableau.com/app/profile/harper.ream/viz/GlobalCovidDashboard3-22-2022/Dashboard1?publish=yes
+
+--Tableau code illustrations are at the end of this code.
+
 
 -- Insert Data
 SELECT *
@@ -238,4 +244,5 @@ Select SUM(new_cases) as SUM_new_cases, SUM(cast(new_deaths as int)) as SUM_new_
 FROM PortfolioProject..CovidDeaths
 Where continent is not NULL and new_deaths is not NULL
 Order By 1,2
+
 

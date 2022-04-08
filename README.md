@@ -4,7 +4,8 @@
 These projects are only personal projects that will potentially show off my understanding of basic Data Analysis and potentially jumpstart my career.
 
 
-###R_Airline_Project is a project used to demonstrate the basics of R.
+
+R_Airline_Project is a project used to demonstrate the basics of R.
 
 Programs used:
 Rstudio
@@ -14,7 +15,8 @@ Microsoft Excel
 
 
 
-###NashvilleCleanup.sql is a project to demonstrate the data cleaning basics.
+
+NashvilleCleanup.sql is a project to demonstrate the data cleaning basics.
 
 Programs used: 
 SQL
@@ -24,7 +26,8 @@ Microsoft Excel
 
 
 
-###PortfolioProject.sql is a project used to demonstrate the basics of data analytics using SQL
+
+PortfolioProject.sql is a project used to demonstrate the basics of data analytics using SQL
 
 Programs used:
 SQL

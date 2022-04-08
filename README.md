@@ -1,7 +1,7 @@
 # Portfolio_Project
 
 
-These projects are only personal projects that will potentially show off my understanding of basic Data Analysis and potentially jumpstart my career.
+These projects are only personal projects that will demonstrate my understanding of basic data analysis and potentially jumpstart my career.
 
 
 

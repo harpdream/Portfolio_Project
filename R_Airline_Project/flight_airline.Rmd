@@ -1,0 +1,149 @@
+---
+title: "Flight_Price_Airline"
+author: "Harper Ream"
+date: "4/7/2022"
+output: github_document
+---
+
+
+
+```{r setup, include=FALSE}
+# install.packages("skimr")
+# install.packages("janitor")
+# install.packages("lubridate")
+# install.packages("zoo")
+# install.packages("ggpubr")
+```
+
+```{r library}
+library(tidyverse)
+library(readr)
+library(ggplot2)
+library(lubridate)
+library(skimr)
+library(dplyr)
+library(zoo)
+library(ggpubr)
+library(tidyr)
+library(stringr)
+```
+
+```{r Load theme, include=FALSE}
+# theme_set(theme_pubr())
+```
+
+```{r Load Dataset}
+airline_flights <- read.csv("Clean_Dataset.csv")
+```
+
+```{r Load Table}
+head(airline_flights)
+```
+
+```{r summary}
+summary(airline_flights$price)
+```
+
+
+Does price vary with Airlines?
+
+
+```{r Mean of Airlines}
+df_airline_mean <- airline_flights %>% 
+  group_by(airline) %>% 
+  summarise_at(vars(price), list(airline_mean = mean))
+```
+
+```{r mean price per airline}
+ggplot(df_airline_mean, aes(x = airline , y = airline_mean, fill = airline)) +
+  geom_col() + scale_fill_manual(
+    values = c(
+      "Air_India" = "#FE9901",
+      "AirAsia" = "#E32526",
+      "GO_FIRST" = "#094a9a", 
+      "Indigo" = "#001B94",
+      "SpiceJet" = "#FAD903",
+      "Vistara" = "#47143D")) +
+    labs(title = "Mean Price per Airline",
+         x = NULL,
+         y = "Mean Price in Rupee",
+         caption = "(based on data from https://www.kaggle.com/shubhambathwal/flight-price-prediction)" ) +
+    scale_y_continuous(breaks = seq(1000, 31000, by = 1500),
+                       minor_breaks = NULL) +
+    theme(plot.title = element_text(face = "bold"))
+```
+
+How is the price affected when tickets are bought in just 1 or 2 days before departure?
+
+ 
+```{r Value range days left}
+df_bookings_total <- airline_flights %>%
+  filter(airline_flights$days_left %in% 1:50) %>% 
+  group_by(days_left) %>% 
+  summarise(mean=mean(price))
+```
+
+```{r total graph}
+total_graph <- ggplot(df_bookings_total) + 
+  geom_point(aes(x = days_left, y = mean)) +
+  labs(title = "Mean Price vs Days Left Before Departure",
+       x = "Days left before Departure",
+       y = "Mean Price in Rupee")
+total_graph
+```
+
+```{r count days left}
+hist(airline_flights$days_left)
+```
+
+The plane is trying to get more people to fill up the seats in the last day before departure.
+
+```{r df: Price vs days_left and Business}
+df_bookings_business <- airline_flights %>%
+  filter(airline_flights$days_left %in% 1:50 & 
+           #airline_flights$airline == "Vistara" & 
+           airline_flights$class == "Business") %>% 
+  group_by(days_left) %>% 
+  summarise(mean=mean(price))
+```
+
+```{r business graph}
+business_graph <- ggplot(df_bookings_business) + geom_point(aes(x = days_left, y = mean)) +
+  labs(title = "Business Class",
+       x = "Days Left Before Departure",
+       y = "Mean Price in Rupee")
+business_graph
+```
+
+```{r df: Price vs days_left and Economy}
+df_bookings_economy <- airline_flights %>%
+  filter(airline_flights$days_left %in% 1:50 & 
+           airline_flights$class == "Economy") %>% 
+  group_by(days_left) %>% 
+  summarise(mean=mean(price))
+```
+
+```{r economy graph}
+economy_graph <- ggplot(df_bookings_economy) + geom_point(aes(x = days_left, y = mean)) + 
+  labs(title = "Economy Seats",
+       x = "Days Left before Departure",
+       y = "Mean Price in Rupee")
+```
+
+
+```{r combine business and economy}
+figure <- ggarrange(total_graph,
+                    ggarrange(business_graph, economy_graph, ncol = 2,
+                    labels = c("B", "C")),
+                    nrow = 2,
+                    labels = "A")
+figure
+```
+
+
+
+
+Why is the price so low on the last day before departure compared to the 2nd to last day before departure?
+
+GO_FIRST, AirAsia, SpiceJet only have Economy class compared to Business class
+

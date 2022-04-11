@@ -32,5 +32,7 @@ Programs used:
 Programs used:
 - SQL
 - Microsoft Excel
+- Tableau Public
 
 [Covid Deaths](https://ourworldindata.org/covid-deaths)
+[Tableau Visual](https://public.tableau.com/app/profile/harper.ream/viz/GlobalCovidDashboard3-22-2022/Dashboard1)

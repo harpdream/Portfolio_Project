@@ -16,7 +16,7 @@ Programs used:
 
 
 
-### NashvilleCleanup.sql is a project to demonstrate the data cleaning basics.
+### NashvilleCleanup.sql is a project to demonstrate the basics of data cleaning.
 
 Programs used: 
 - SQL
@@ -27,7 +27,7 @@ Programs used:
 
 
 
-### PortfolioProject.sql is a project used to demonstrate the basics of data analytics using SQL
+### PortfolioProject.sql is a project used to demonstrate the basics of data analytics using SQL and Tableau.
 
 Programs used:
 - SQL
